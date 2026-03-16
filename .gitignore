@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.local
+data/
+.npmrc
+affine/
+*.bin
+.DS_Store
+*.log
+.vercel
+.turbo

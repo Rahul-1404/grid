@@ -1,0 +1,38 @@
+{
+  "name": "@ollielabs/grid-agent",
+  "version": "0.3.1",
+  "description": "Connect any AI agent to Grid - the collaborative workspace for humans and agents",
+  "bin": {
+    "grid-agent": "bin/grid-connect.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "grid",
+    "ai-agent",
+    "collaborative",
+    "websocket",
+    "agent-sdk"
+  ],
+  "author": "Ollie Labs",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.16.0",
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.10",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}
