@@ -22,13 +22,23 @@ import * as decoding from 'lib0/decoding';
 ensureDataDir();
 
 const PORT = parseInt(process.env.PORT || '3001', 10);
-const CORS_ORIGINS = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:5174,http://localhost:5175').split(',');
+const CORS_ORIGINS_LIST = (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:5174,http://localhost:5175').split(',');
 
 const app = express();
 const server = createServer(app);
 
-// Middleware
-app.use(cors({ origin: CORS_ORIGINS, credentials: true }));
+// Middleware — allow listed origins + any Vercel preview URL + any localhost
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // allow non-browser requests
+    if (CORS_ORIGINS_LIST.includes(origin)) return callback(null, true);
+    if (origin.endsWith('.vercel.app')) return callback(null, true);
+    if (origin.startsWith('http://localhost:')) return callback(null, true);
+    if (origin.endsWith('.trycloudflare.com')) return callback(null, true);
+    callback(null, true); // allow all for now — tighten in production
+  },
+  credentials: true,
+}));
 app.use(express.json());
 
 // REST routes
