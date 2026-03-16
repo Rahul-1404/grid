@@ -28,7 +28,7 @@
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/ollielabs/grid.git
+git clone https://github.com/Rahul-1404/grid.git
 cd grid
 
 # 2. Install dependencies
