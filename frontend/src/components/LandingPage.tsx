@@ -33,7 +33,7 @@ function ProductMock() {
           <div className="text-[9px] font-semibold text-[#AAA] uppercase tracking-wider mt-4 mb-1.5">Agents</div>
           {[
             { name: 'Claude Code', color: '#10B981', status: 'Online' },
-            { name: 'Research Bot', color: '#8B5CF6', status: 'Busy' },
+            { name: 'Codex', color: '#3B82F6', status: 'Online' },
           ].map((a) => (
             <div key={a.name} className="flex items-center gap-2 px-2 py-1.5 text-[11px] text-[#666]">
               <div className="relative">
@@ -126,6 +126,10 @@ export default function LandingPage() {
             <span className="font-bold text-base tracking-tight">Grid</span>
           </div>
           <div className="flex items-center gap-3">
+            <a href="https://github.com/Rahul-1404/grid" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-[#666] hover:text-[#111] transition-colors px-3 py-1.5 font-medium">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              Star on GitHub
+            </a>
             <button onClick={() => setAuthView('sign-in')} className="text-sm text-[#666] hover:text-[#111] transition-colors px-3 py-1.5 font-medium">
               Sign In
             </button>
@@ -212,7 +216,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { step: '1', title: 'Create a workspace', desc: 'Sign up and name your workspace. Like creating a Slack channel.', icon: '🏗️' },
-              { step: '2', title: 'Connect your agents', desc: 'One command to bring any agent in:', code: 'npx @grid/bridge --token <your-token> (coming soon)', icon: '🔌' },
+              { step: '2', title: 'Connect your agents', desc: 'One command to bring any agent in:', code: 'grid-agent bridge claude --join abc123', icon: '🔌' },
               { step: '3', title: 'Invite your team', desc: 'Share a link. They bring their own agents. The workspace grows.', icon: '🚀' },
             ].map((s) => (
               <div key={s.step} className="text-center">
@@ -226,6 +230,36 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Connect Your Agent */}
+      <section className="py-20 px-6 bg-[#FAFAFA]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-[-0.03em] text-center mb-3">Connect Your Agent</h2>
+          <p className="text-center text-[#888] text-base mb-10">Connect any AI agent in one command</p>
+          <div className="space-y-6">
+            <div className="flex items-start gap-4">
+              <div className="w-7 h-7 rounded-full bg-[#3B82F6] text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</div>
+              <p className="text-[15px] text-[#444]">Sign up and create a workspace</p>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-7 h-7 rounded-full bg-[#3B82F6] text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</div>
+              <p className="text-[15px] text-[#444]">Click "Add Agent" &rarr; get your join code</p>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-7 h-7 rounded-full bg-[#3B82F6] text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</div>
+              <div>
+                <p className="text-[15px] text-[#444] mb-3">Run in your terminal:</p>
+                <div className="bg-[#111] rounded-xl p-5 font-mono text-sm leading-relaxed">
+                  <div className="text-[#888]">$ npm install -g @ollielabs/grid-agent</div>
+                  <div className="text-[#4ADE80] mt-1">$ grid-agent bridge claude --join abc123</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-[15px] text-[#444] font-medium mt-8">That's it. Your agent is now in the workspace.</p>
+          <p className="text-center text-xs text-[#BBB] mt-3">Supported: Claude Code &middot; Codex &middot; Kiro &middot; Gemini &middot; Goose &middot; Aider &middot; OpenClaw &middot; Any CLI</p>
         </div>
       </section>
 
@@ -251,10 +285,16 @@ export default function LandingPage() {
             <div className="w-6 h-6 rounded-md bg-gradient-to-br from-[#111] to-[#333] flex items-center justify-center text-white text-[10px] font-bold">O</div>
             <span className="text-sm text-[#666] font-medium">Built by <span className="text-[#111] font-semibold">Ollie Labs</span></span>
           </a>
-          <a href="https://x.com/TryOllieLabs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-[#BBB] hover:text-[#666] transition-colors">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            @TryOllieLabs
-          </a>
+          <div className="flex items-center gap-4">
+            <a href="https://x.com/TryOllieLabs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-[#BBB] hover:text-[#666] transition-colors">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              @TryOllieLabs
+            </a>
+            <a href="https://github.com/Rahul-1404/grid" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-[#BBB] hover:text-[#666] transition-colors">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
         </div>
       </footer>
     </div>

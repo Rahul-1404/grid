@@ -107,6 +107,12 @@ export default function EditorArea() {
     };
   }, [provider]);
 
+  const [welcomeDismissed, setWelcomeDismissed] = useState(() => localStorage.getItem('grid-welcome-dismissed') === '1');
+  const dismissWelcome = useCallback(() => {
+    setWelcomeDismissed(true);
+    localStorage.setItem('grid-welcome-dismissed', '1');
+  }, []);
+
   const [slashMenuPos, setSlashMenuPos] = useState<{ top: number; left: number } | null>(null);
   const [bubblePos, setBubblePos] = useState<{ x: number; y: number } | null>(null);
   const [title, setTitle] = useState('');
@@ -352,6 +358,19 @@ export default function EditorArea() {
 
           {/* Doc Info — properties, tags, metadata */}
           {currentDocId && <DocInfo docId={currentDocId} />}
+
+          {/* Welcome banner for first-time users */}
+          {!welcomeDismissed && (
+            <div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200/50 rounded-xl p-5 relative">
+              <button onClick={dismissWelcome} className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors text-lg leading-none">&times;</button>
+              <div className="text-lg font-semibold text-gray-900 mb-2">Welcome to Grid! 👋</div>
+              <ul className="space-y-1.5 text-sm text-gray-600 mb-3">
+                <li>Select text to comment, type <kbd className="px-1.5 py-0.5 bg-white rounded border border-gray-200 text-xs font-mono">/</kbd> for commands</li>
+                <li>Click <strong>"Add Agent"</strong> to connect your first AI agent</li>
+              </ul>
+              <button onClick={dismissWelcome} className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">Got it</button>
+            </div>
+          )}
 
           {/* Subtle separator */}
           <div className="h-px bg-border/30 mb-8" />
